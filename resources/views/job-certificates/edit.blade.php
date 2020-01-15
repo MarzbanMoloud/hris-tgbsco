@@ -72,11 +72,11 @@
                         <div class="clearfix"></div>
 
                         {{--Status--}}
-                        <div class="form-group col-md-4">
-                            <label for="status">فعال</label>
-                            <input type="checkbox" id="status" name="status"
-                                    {{ ($jobCertificate->status == \App\JobCertificate::ENABLE)? 'checked' : null }}>
-                        </div>
+                        {{--<div class="form-group col-md-4">--}}
+                            {{--<label for="status">فعال</label>--}}
+                            {{--<input type="checkbox" id="status" name="status"--}}
+                                    {{--{{ ($jobCertificate->status == \App\JobCertificate::ENABLE)? 'checked' : null }}>--}}
+                        {{--</div>--}}
 
                         <div class="clearfix"></div>
 

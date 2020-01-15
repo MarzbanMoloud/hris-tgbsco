@@ -26,7 +26,9 @@ class LoanService
      */
     public function all($paginate = false)
     {
-        $loans = Loan::query()->orderBy('updated_at', 'DESC');
+        $loans = Loan::query()
+            ->has('personnel')
+            ->orderBy('updated_at', 'DESC');
         if ($paginate){
             return $loans->paginate();
         }
@@ -44,7 +46,7 @@ class LoanService
             'personnel_id' => $loan->getPersonnelId(),
             'amount' => $loan->getAmount(),
             'receive_date' => $loan->getReceiveDate(),
-            'status' => $loan->getStatus(),
+            //'status' => $loan->getStatus(),
         ]);
     }
 
@@ -59,7 +61,7 @@ class LoanService
             'personnel_id' => $updateLoan->getPersonnelId(),
             'amount' => $updateLoan->getAmount(),
             'receive_date' => $updateLoan->getReceiveDate(),
-            'status' => $updateLoan->getStatus(),
+            //'status' => $updateLoan->getStatus(),
         ]);
     }
 
@@ -70,7 +72,7 @@ class LoanService
     public function timesLoanToDedicatedPersonnel($personnelId)
     {
         return Loan::where('personnel_id', $personnelId)
-            ->where('status', Loan::ENABLE)
+            //->where('status', Loan::ENABLE)
             ->count();
     }
 }

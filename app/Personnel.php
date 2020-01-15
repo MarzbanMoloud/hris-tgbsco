@@ -149,6 +149,14 @@ class Personnel extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function salary()
+    {
+        return $this->hasOne(Salary::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function loans()

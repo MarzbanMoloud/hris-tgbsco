@@ -61,11 +61,11 @@ class UpdateHelp
         return null;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return ($this->request->status == 'on') ? Help::ENABLE : Help::DISABLE;
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getStatus()
+//    {
+//        return ($this->request->status == 'on') ? Help::ENABLE : Help::DISABLE;
+//    }
 }

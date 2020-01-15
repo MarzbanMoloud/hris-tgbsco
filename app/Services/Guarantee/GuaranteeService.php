@@ -26,7 +26,9 @@ class GuaranteeService
      */
     public function all($paginate = false)
     {
-        $guarantees = Guarantee::query()->orderBy('updated_at', 'DESC');
+        $guarantees = Guarantee::query()
+            ->has('personnel')
+            ->orderBy('updated_at', 'DESC');
         if ($paginate){
             return $guarantees->paginate();
         }
@@ -44,7 +46,7 @@ class GuaranteeService
             'personnel_id' => $guarantee->getPersonnelId(),
             'amount' => $guarantee->getAmount(),
             'receive_date' => $guarantee->getReceiveDate(),
-            'status' => $guarantee->getStatus(),
+            //'status' => $guarantee->getStatus(),
         ]);
     }
 
@@ -59,7 +61,7 @@ class GuaranteeService
             'personnel_id' => $updateGuarantee->getPersonnelId(),
             'amount' => $updateGuarantee->getAmount(),
             'receive_date' => $updateGuarantee->getReceiveDate(),
-            'status' => $updateGuarantee->getStatus(),
+            //'status' => $updateGuarantee->getStatus(),
         ]);
     }
 
@@ -70,7 +72,7 @@ class GuaranteeService
     public function timesGuaranteeToDedicatedPersonnel($personnelId)
     {
         return Guarantee::where('personnel_id', $personnelId)
-            ->where('status', Guarantee::ENABLE)
+            //->where('status', Guarantee::ENABLE)
             ->count();
     }
 }

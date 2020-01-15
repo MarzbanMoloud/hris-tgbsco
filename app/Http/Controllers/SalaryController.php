@@ -68,9 +68,9 @@ class SalaryController extends Controller
     {
         try{
             $this->service->create((new CreateSalary($request)));
-            return redirect()->route('salaries.index')->with('success','عملیات انجام شد');
+            return redirect()->back()->with('success','عملیات انجام شد');
         }catch(\Exception $e){dd($e->getMessage());
-            return redirect()->route('salaries.index')->with('error','عملیات با مشکل مواجه شد');
+            return redirect()->back()->with('error','عملیات با مشکل مواجه شد');
         }
     }
 

@@ -26,6 +26,12 @@
                             لیست پرسنل
                         </a>
                     </div>
+                    @component('components.submit-button')
+                        @slot('name', 'submit_amounts')
+                        @slot('class', 'btn btn-primary btn-xs submit_amounts')
+                        @slot('value', 'اطلاعات حقوقی')
+                        @slot('dataId', $personnel->id)
+                    @endcomponent
                     <hr>
 
                     <!-- tools box -->
@@ -551,6 +557,28 @@
                             console.log(data);
                         }
                     });
+                });
+
+                $('.submit_amounts').on('click', function () {
+                    var personnelId = $(this).attr('data-id');
+                    $('#legal-info-header').html(personnelId);
+                    $('#legal-info-input').val(personnelId);
+
+                    $.ajax({
+                        type: "get",
+                        url: '{{ \Illuminate\Support\Facades\URL::to('salaries/amounts') }}' + '/' + personnelId,
+                        success: function(data){
+                            $('#insurance_amount').val(data.insurance_amount);
+                            $('#benefit_of_amount').val(data.benefit_of_amount);
+                            formatCurrency($('#insurance_amount'));
+                            formatCurrency($('#benefit_of_amount'));
+                            console.log(data);
+                        },
+                        error: function(data){
+                        }
+                    });
+
+                    $('#legal-info').modal("show");
                 });
 
             });

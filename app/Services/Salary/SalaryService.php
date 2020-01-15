@@ -47,7 +47,7 @@ class SalaryService
     public function create(CreateSalary $salary)
     {
         $salaryRecord = Salary::where('personnel_id', $salary->getPersonnelId())->first();
-        if (empty($salary)){
+        if (empty($salaryRecord)){
             return Salary::create([
                 'user_id' => auth()->id(),
                 'personnel_id' => $salary->getPersonnelId(),

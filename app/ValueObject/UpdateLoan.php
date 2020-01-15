@@ -61,11 +61,11 @@ class UpdateLoan
         return null;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return ($this->request->status == 'on') ? Loan::ENABLE : Loan::DISABLE;
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getStatus()
+//    {
+//        return ($this->request->status == 'on') ? Loan::ENABLE : Loan::DISABLE;
+//    }
 }

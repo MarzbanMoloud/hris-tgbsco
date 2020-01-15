@@ -39,7 +39,7 @@
                             <th>شناسه گواهی شغلی</th>
                             <th>نام پرسنل</th>
                             <th>کدپرسنل</th>
-                            <th>وضعیت</th>
+                            {{--<th>وضعیت</th>--}}
                             <th>کاربر</th>
                             <th>آخرین ویرایش</th>
                             <th>عملیات</th>
@@ -49,7 +49,7 @@
                                 <td>{{ $jobCertificate->id }}</td>
                                 <td>{{ $jobCertificate->personnel()->first()->full_name }}</td>
                                 <td>{{ $jobCertificate->personnel()->first()->personnel_code }}</td>
-                                <td>{{ \App\Loan::STATUSES[$jobCertificate->status] ?? '' }}</td>
+{{--                                <td>{{ \App\Loan::STATUSES[$jobCertificate->status] ?? '' }}</td>--}}
                                 <td>{{ \App\User::find($jobCertificate->user_id)->name ?? '' }}</td>
                                 <td>{{ $dateConverter::toJalali($jobCertificate->updated_at) }}</td>
                                 <td>

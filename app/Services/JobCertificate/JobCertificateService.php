@@ -26,7 +26,9 @@ class JobCertificateService
      */
     public function all($paginate = false)
     {
-        $jobCertificates = JobCertificate::query()->orderBy('updated_at', 'DESC');
+        $jobCertificates = JobCertificate::query()
+            ->has('personnel')
+            ->orderBy('updated_at', 'DESC');
         if ($paginate){
             return $jobCertificates->paginate();
         }
@@ -43,7 +45,7 @@ class JobCertificateService
             'user_id' => auth()->id(),
             'personnel_id' => $jobCertificate->getPersonnelId(),
             'receive_date' => $jobCertificate->getReceiveDate(),
-            'status' => $jobCertificate->getStatus(),
+            //'status' => $jobCertificate->getStatus(),
         ]);
     }
 
@@ -57,7 +59,7 @@ class JobCertificateService
             'user_id' => auth()->id(),
             'personnel_id' => $updateJobCertificate->getPersonnelId(),
             'receive_date' => $updateJobCertificate->getReceiveDate(),
-            'status' => $updateJobCertificate->getStatus(),
+            //'status' => $updateJobCertificate->getStatus(),
         ]);
     }
 
@@ -68,7 +70,7 @@ class JobCertificateService
     public function timesJobCertificateToDedicatedPersonnel($personnelId)
     {
         return JobCertificate::where('personnel_id', $personnelId)
-            ->where('status', JobCertificate::ENABLE)
+            //->where('status', JobCertificate::ENABLE)
             ->count();
     }
 }

@@ -26,7 +26,9 @@ class HelpService
      */
     public function all($paginate = false)
     {
-        $helps = Help::query()->orderBy('updated_at', 'DESC');
+        $helps = Help::query()
+            ->has('personnel')
+            ->orderBy('updated_at', 'DESC');
         if ($paginate){
             return $helps->paginate();
         }
@@ -44,7 +46,7 @@ class HelpService
             'personnel_id' => $help->getPersonnelId(),
             'amount' => $help->getAmount(),
             'receive_date' => $help->getReceiveDate(),
-            'status' => $help->getStatus(),
+            //'status' => $help->getStatus(),
         ]);
     }
 
@@ -59,7 +61,7 @@ class HelpService
             'personnel_id' => $updateHelp->getPersonnelId(),
             'amount' => $updateHelp->getAmount(),
             'receive_date' => $updateHelp->getReceiveDate(),
-            'status' => $updateHelp->getStatus(),
+            //'status' => $updateHelp->getStatus(),
         ]);
     }
 
@@ -70,7 +72,7 @@ class HelpService
     public function timesHelpToDedicatedPersonnel($personnelId)
     {
         return Help::where('personnel_id', $personnelId)
-            ->where('status', Help::ENABLE)
+            //->where('status', Help::ENABLE)
             ->count();
     }
 }

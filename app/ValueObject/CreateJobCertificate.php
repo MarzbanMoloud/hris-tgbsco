@@ -52,11 +52,11 @@ class CreateJobCertificate
         return null;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return ($this->request->status == 'on') ? JobCertificate::ENABLE : JobCertificate::DISABLE;
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getStatus()
+//    {
+//        return ($this->request->status == 'on') ? JobCertificate::ENABLE : JobCertificate::DISABLE;
+//    }
 }

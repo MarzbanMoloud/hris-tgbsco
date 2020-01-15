@@ -39,7 +39,7 @@
                             <th>شناسه مساعده</th>
                             <th>نام پرسنل</th>
                             <th>کدپرسنل</th>
-                            <th>وضعیت</th>
+                            {{--<th>وضعیت</th>--}}
                             <th>کاربر</th>
                             <th>آخرین ویرایش</th>
                             <th>عملیات</th>
@@ -49,7 +49,7 @@
                                 <td>{{ $help->id }}</td>
                                 <td>{{ $help->personnel()->first()->full_name }}</td>
                                 <td>{{ $help->personnel()->first()->personnel_code }}</td>
-                                <td>{{ \App\Help::STATUSES[$help->status] ?? '' }}</td>
+{{--                                <td>{{ \App\Help::STATUSES[$help->status] ?? '' }}</td>--}}
                                 <td>{{ \App\User::find($help->user_id)->name ?? '' }}</td>
                                 <td>{{ $dateConverter::toJalali($help->updated_at) }}</td>
                                 <td>

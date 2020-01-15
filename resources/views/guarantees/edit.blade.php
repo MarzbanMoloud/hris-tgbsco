@@ -83,12 +83,11 @@
                         @endcomponent
 
                         {{--Status--}}
-                        {{--Status--}}
-                        <div class="form-group col-md-4">
-                            <label for="status">فعال</label>
-                            <input type="checkbox" id="status" name="status"
-                                    {{ ($guarantee->status == \App\Guarantee::ENABLE)? 'checked' : null }}>
-                        </div>
+                        {{--<div class="form-group col-md-4">--}}
+                            {{--<label for="status">فعال</label>--}}
+                            {{--<input type="checkbox" id="status" name="status"--}}
+                                    {{--{{ ($guarantee->status == \App\Guarantee::ENABLE)? 'checked' : null }}>--}}
+                        {{--</div>--}}
 
                         <div class="clearfix"></div>
 

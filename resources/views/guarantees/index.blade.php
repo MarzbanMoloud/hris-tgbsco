@@ -39,7 +39,7 @@
                             <th>شناسه ضمانت</th>
                             <th>نام پرسنل</th>
                             <th>کدپرسنل</th>
-                            <th>وضعیت</th>
+                            {{--<th>وضعیت</th>--}}
                             <th>کاربر</th>
                             <th>آخرین ویرایش</th>
                             <th>عملیات</th>
@@ -49,7 +49,7 @@
                                 <td>{{ $guarantee->id }}</td>
                                 <td>{{ $guarantee->personnel()->first()->full_name }}</td>
                                 <td>{{ $guarantee->personnel()->first()->personnel_code }}</td>
-                                <td>{{ \App\Guarantee::STATUSES[$guarantee->status] ?? '' }}</td>
+{{--                                <td>{{ \App\Guarantee::STATUSES[$guarantee->status] ?? '' }}</td>--}}
                                 <td>{{ \App\User::find($guarantee->user_id)->name ?? '' }}</td>
                                 <td>{{ $dateConverter::toJalali($guarantee->updated_at) }}</td>
                                 <td>

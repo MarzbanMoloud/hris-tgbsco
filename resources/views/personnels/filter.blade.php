@@ -245,14 +245,14 @@
                                     </td>
                                 @endif
                                 <td>
-                                    <a href="{{ route('personnels.edit', ['personnel' => $personnel->id]) }}" class="btn btn-primary btn-xs" title="ویرایش">
-                                        <i class="fa fa-edit"></i>&nbsp; ویرایش &nbsp;
-                                    </a>
-                                    @if(isset(request()->personnelStatus) && request()->personnelStatus == 2)
+                                    @if(isset(request()->personnelStatus) && request()->personnelStatus == "2")
                                         <a href="{{ route('personnels.restore', ['personnel' => $personnel->id]) }}" class="btn btn-success btn-xs" title="بازیابی">
                                             <i class="fa fa-rotate-right"></i>&nbsp; بازیابی &nbsp;
                                         </a>
                                     @else
+                                        <a href="{{ route('personnels.edit', ['personnel' => $personnel->id]) }}" class="btn btn-primary btn-xs" title="ویرایش">
+                                            <i class="fa fa-edit"></i>&nbsp; ویرایش &nbsp;
+                                        </a>
                                         <a href="#" data-id="{{ $personnel->id }}" class="btn btn-danger btn-xs" title="حذف">
                                             <i class="fa fa-trash"></i>&nbsp; حذف &nbsp;
                                         </a>

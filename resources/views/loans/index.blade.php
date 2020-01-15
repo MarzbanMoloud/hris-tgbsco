@@ -39,7 +39,7 @@
                             <th>شناسه وام</th>
                             <th>نام پرسنل</th>
                             <th>کدپرسنل</th>
-                            <th>وضعیت</th>
+                            {{--<th>وضعیت</th>--}}
                             <th>کاربر</th>
                             <th>آخرین ویرایش</th>
                             <th>عملیات</th>
@@ -49,7 +49,7 @@
                                 <td>{{ $loan->id }}</td>
                                 <td>{{ $loan->personnel()->first()->full_name }}</td>
                                 <td>{{ $loan->personnel()->first()->personnel_code }}</td>
-                                <td>{{ \App\Loan::STATUSES[$loan->status] ?? '' }}</td>
+{{--                                <td>{{ \App\Loan::STATUSES[$loan->status] ?? '' }}</td>--}}
                                 <td>{{ \App\User::find($loan->user_id)->name ?? '' }}</td>
                                 <td>{{ $dateConverter::toJalali($loan->updated_at) }}</td>
                                 <td>

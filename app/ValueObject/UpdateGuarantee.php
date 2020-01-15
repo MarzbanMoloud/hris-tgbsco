@@ -61,11 +61,11 @@ class UpdateGuarantee
         return null;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return ($this->request->status == 'on') ? Guarantee::ENABLE : Guarantee::DISABLE;
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getStatus()
+//    {
+//        return ($this->request->status == 'on') ? Guarantee::ENABLE : Guarantee::DISABLE;
+//    }
 }

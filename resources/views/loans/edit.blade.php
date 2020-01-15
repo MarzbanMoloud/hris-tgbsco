@@ -83,11 +83,11 @@
                         @endcomponent
 
                         {{--Status--}}
-                        <div class="form-group col-md-4">
-                            <label for="status">فعال</label>
-                            <input type="checkbox" id="status" name="status"
-                                {{ ($loan->status == \App\Loan::ENABLE)? 'checked' : null }}>
-                        </div>
+                        {{--<div class="form-group col-md-4">--}}
+                            {{--<label for="status">فعال</label>--}}
+                            {{--<input type="checkbox" id="status" name="status"--}}
+                                {{--{{ ($loan->status == \App\Loan::ENABLE)? 'checked' : null }}>--}}
+                        {{--</div>--}}
 
                         <div class="clearfix"></div>
 

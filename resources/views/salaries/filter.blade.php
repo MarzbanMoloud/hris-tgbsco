@@ -158,7 +158,8 @@
                             @if(request()->has('projects'))
                                 <th>پروژه</th>
                             @endif
-
+                            <th>مبلغ بیمه ای (ریال)</th>
+                            <th>مبلغ حقوق و مزایا (ریال)</th>
                             <th>عملیات</th>
                         </tr>
                         @foreach($personnels as $key => $personnel)
@@ -222,6 +223,8 @@
                                         @endforeach
                                     </td>
                                 @endif
+                                <td>{{ number_format($personnel->salary()->first()['insurance_amount']) ?? '' }}</td>
+                                <td>{{ number_format($personnel->salary()->first()['benefit_of_amount']) ?? '' }}</td>
                                 <td>
                                     @component('components.submit-button')
                                         @slot('name', 'submit_amounts')
@@ -270,7 +273,7 @@
 
                     $.ajax({
                         type: "get",
-                        url: "/salaries/amounts/" + personnelId,
+                        url: '{{ \Illuminate\Support\Facades\URL::to('salaries/amounts') }}' + '/' + personnelId,
                         success: function(data){
                             $('#insurance_amount').val(data.insurance_amount);
                             $('#benefit_of_amount').val(data.benefit_of_amount);

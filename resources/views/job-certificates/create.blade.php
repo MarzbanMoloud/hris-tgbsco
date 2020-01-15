@@ -63,10 +63,10 @@
                         <div class="clearfix"></div>
 
                         {{--Status--}}
-                        <div class="form-group col-md-4">
-                            <label for="status">فعال</label>
-                            <input type="checkbox" id="status" name="status">
-                        </div>
+                        {{--<div class="form-group col-md-4">--}}
+                            {{--<label for="status">فعال</label>--}}
+                            {{--<input type="checkbox" id="status" name="status">--}}
+                        {{--</div>--}}
 
                         <div class="clearfix"></div>
 
@@ -111,7 +111,7 @@
 
                 $.ajax({
                     type: "get",
-                    url: "/jobCertificates/times/" + selected_personnel,
+                    url: "{{ URL::to('jobCertificates/times') }}"+ '/' + selected_personnel,
                     success: function(count){
                         if (count >= 3) {
                             $('#frequently-facility-text').html(count);

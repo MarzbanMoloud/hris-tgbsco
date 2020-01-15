@@ -83,11 +83,11 @@
                         @endcomponent
 
                         {{--Status--}}
-                        <div class="form-group col-md-4">
-                            <label for="status">فعال</label>
-                            <input type="checkbox" id="status" name="status"
-                               {{ ($help->status == \App\Help::ENABLE)? 'checked' : '' }}>
-                        </div>
+                        {{--<div class="form-group col-md-4">--}}
+                            {{--<label for="status">فعال</label>--}}
+                            {{--<input type="checkbox" id="status" name="status"--}}
+                               {{--{{ ($help->status == \App\Help::ENABLE)? 'checked' : '' }}>--}}
+                        {{--</div>--}}
 
                         <div class="clearfix"></div>
 
