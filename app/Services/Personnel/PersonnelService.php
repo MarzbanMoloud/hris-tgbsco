@@ -63,11 +63,11 @@ class PersonnelService
         }
 
         if (isset($request->personnelStatus)){
-            if ($request->personnelStatus == 1)
+            if ($request->personnelStatus == Personnel::ACTIVE)
                 $personnels->where('end_date', '=' , null);
-            elseif($request->personnelStatus == 0)
+            elseif($request->personnelStatus == Personnel::DE_ACTIVE)
                 $personnels->where('end_date', '<>' ,null);
-            elseif($request->personnelStatus == 2)
+            elseif($request->personnelStatus == Personnel::DELETED)
                 $personnels->onlyTrashed();
         }
 
@@ -181,5 +181,23 @@ class PersonnelService
             'gender' => $updatePersonnel->getGender(),
         ]);
         $personnel->projects()->sync( $updatePersonnel->getProjects() );
+    }
+
+    /**
+     * @param $status
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function personnelsByStatus($status)
+    {
+        $personnels = Personnel::query();
+
+        if ($status == Personnel::ACTIVE)
+            $personnels->where('end_date', '=' , null);
+        elseif($status == Personnel::DE_ACTIVE)
+            $personnels->where('end_date', '<>' ,null);
+        elseif($status == Personnel::DELETED)
+            $personnels->onlyTrashed();
+
+        return $personnels->get();
     }
 }

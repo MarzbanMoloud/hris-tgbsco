@@ -37,4 +37,13 @@ class DateConverter
         $jDate = Jalalian::forge($timestamp);
         return $jDate->getYear() . '/' . $jDate->getMonth() . '/' . $jDate->getDay();
     }
+
+    /**
+     * @param $timestamp
+     * @return int
+     */
+    public static function getYearJalali($timestamp)
+    {
+        return Jalalian::forge($timestamp)->getYear();
+    }
 }

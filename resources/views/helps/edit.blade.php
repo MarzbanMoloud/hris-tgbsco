@@ -50,9 +50,9 @@
                             @slot('id', 'personnelId')
                             @slot('label', 'پرسنل')
                             @foreach($personnelService->all() as $key => $personnel)
-                                <option value="{{ $personnel->id }}"
-                                    {{ ($personnel->id == $help->personnel_id) ? "selected" : '' }}
-                                > {{ $personnel->full_name }} </option>
+                                @if($personnel->id == $help->personnel_id)
+                                    <option value="{{ $personnel->id }}" selected> {{ $personnel->full_name }} </option>
+                                @endif
                             @endforeach
                         @endcomponent
 

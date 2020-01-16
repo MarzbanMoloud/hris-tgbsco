@@ -39,15 +39,25 @@
                     <form action="{{ route('loans.store') }}" method="post" id="create-loan-form">
                         @csrf
 
+                        {{--PersonnelStatus--}}
+                        @component('components.select-option')
+                            @slot('name', 'personnel_status')
+                            @slot('id', 'personnel_status')
+                            @slot('label', 'وضعیت پرسنل')
+                            @slot('classWrapper', 'col-md-4')
+                            @foreach(\App\Personnel::STATUSES as $key => $status)
+                                @if($key != \App\Personnel::DELETED)
+                                    <option value="{{ $key }}"> {{ $status }} </option>
+                                @endif
+                            @endforeach
+                        @endcomponent
+
                         {{--Personnel--}}
                         @component('components.select-option')
                             @slot('name', 'personnelId')
                             @slot('id', 'personnelId')
                             @slot('label', 'پرسنل')
                             @slot('classWrapper', 'col-md-4')
-                            @foreach($personnelService->all() as $key => $personnel)
-                                <option value="{{ $personnel->id }}"> {{ $personnel->full_name }} </option>
-                            @endforeach
                         @endcomponent
 
                         {{--Amount--}}
@@ -71,6 +81,15 @@
                             @slot('label', 'تاریخ دریافت')
                             @slot('classWrapper', 'col-md-4')
                             @slot('required', 'required')
+                        @endcomponent
+
+                        {{--SettlementDate--}}
+                        @component('components.input')
+                            @slot('type', 'text')
+                            @slot('name', 'settlement_date')
+                            @slot('id', 'settlement_date')
+                            @slot('label', 'تاریخ تسویه')
+                            @slot('classWrapper', 'col-md-4')
                         @endcomponent
 
                         {{--Status--}}
@@ -114,6 +133,7 @@
                 , gotoToday: true
             };
             kamaDatepicker('receive_date', customOptions);
+            kamaDatepicker('settlement_date', customOptions);
 
             /*-------------------- PriceFormat --------------------*/
             $('#amount').on({
@@ -218,6 +238,26 @@
 
                 $('#frequently-facility-btn').on('click', function () {
                     $('#create-loan-form').submit();
+                });
+            });
+
+            /*-------------------- Load personnel list based on selected personnel status --------------------*/
+            $("#personnel_status").change(function() {
+                $('#personnelId').empty();
+
+                var selected_status = $( this ).children("option:selected").val();
+
+                $.ajax({
+                    type: "get",
+                    url: "{{ URL::to('personnels/list') }}"+ '/' + selected_status,
+                    success: function(personnels){
+                        $.each( personnels, function( key, personnel ) {
+                            $('#personnelId').append('<option value="'+ personnel.id +'">' + personnel.full_name + '</option>');
+                        });
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
                 });
             });
         </script>

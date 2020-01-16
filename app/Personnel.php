@@ -108,6 +108,16 @@ class Personnel extends Model
         6 => 'موارد دیکر',
     ];
 
+    const STATUSES = [
+        1 => 'فعال',
+        0 => 'غیرفعال',
+        2 => 'حذف شده',
+    ];
+
+    const ACTIVE = 1;
+    const DE_ACTIVE = 0;
+    const DELETED = 2;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

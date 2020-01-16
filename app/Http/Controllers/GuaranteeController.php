@@ -138,4 +138,15 @@ class GuaranteeController extends Controller
         $times = $this->service->timesGuaranteeToDedicatedPersonnel($personnel->id);
         return $times;
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        $guarantees = $this->service->filterByPersonnel($request->personnelId);
+
+        return view(self::PREFIX_VIEW . 'index', compact('guarantees'));
+    }
 }

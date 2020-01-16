@@ -160,4 +160,16 @@ class PersonnelController extends Controller
 
         return view(self::PREFIX_VIEW . 'filter', compact('personnels', 'filters'));
     }
+
+    /**
+     * @param $status
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     *
+     * Load list of personnel by selected personnel status
+     *
+     */
+    public function list($status)
+    {
+        return $this->service->personnelsByStatus($status);
+    }
 }

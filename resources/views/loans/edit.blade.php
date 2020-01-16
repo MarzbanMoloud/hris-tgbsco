@@ -50,9 +50,9 @@
                             @slot('id', 'personnelId')
                             @slot('label', 'پرسنل')
                             @foreach($personnelService->all() as $key => $personnel)
-                                <option value="{{ $personnel->id }}"
-                                    {{ ($personnel->id == $loan->personnel_id) ? "selected" : '' }}
-                                > {{ $personnel->full_name }} </option>
+                                @if($personnel->id == $loan->personnel_id)
+                                <option value="{{ $personnel->id }}" selected> {{ $personnel->full_name }} </option>
+                                @endif
                             @endforeach
                         @endcomponent
 
@@ -80,6 +80,15 @@
                                 @slot('value', $dateConverter::toJalali($loan->receive_date))
                             @endif
                             @slot('required', 'required')
+                        @endcomponent
+
+                        {{--SettlementDate--}}
+                        @component('components.input')
+                            @slot('type', 'text')
+                            @slot('name', 'settlement_date')
+                            @slot('id', 'settlement_date')
+                            @slot('label', 'تاریخ تسویه')
+                            @slot('classWrapper', 'col-md-4')
                         @endcomponent
 
                         {{--Status--}}
@@ -123,6 +132,7 @@
             };
 
             kamaDatepicker('receive_date', customOptions);
+            kamaDatepicker('settlement_date', customOptions);
 
             formatCurrency($('#amount'));
 

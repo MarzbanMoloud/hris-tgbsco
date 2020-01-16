@@ -11,6 +11,7 @@ use App\Personnel;
 use App\Services\Loan\LoanService;
 use App\ValueObject\CreateLoan;
 use App\ValueObject\UpdateLoan;
+use Illuminate\Http\Request;
 
 
 /**
@@ -130,5 +131,16 @@ class LoanController extends Controller
     {
         $times = $this->service->timesLoanToDedicatedPersonnel($personnel->id);
         return $times;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        $loans = $this->service->filterByPersonnel($request->personnelId);
+
+        return view(self::PREFIX_VIEW . 'index', compact('loans'));
     }
 }

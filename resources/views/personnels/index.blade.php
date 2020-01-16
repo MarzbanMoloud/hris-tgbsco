@@ -70,9 +70,9 @@
                                     @slot('id', 'personnelStatus')
                                     @slot('label', 'وضعیت پرسنل:')
                                     <option value=""></option>
-                                    <option value="1">فعال</option>
-                                    <option value="0">غیرفعال</option>
-                                    <option value="2">حذف شده</option>
+                                   @foreach(\App\Personnel::STATUSES as $key => $status)
+                                        <option value="{{ $key }}">{{ $status }}</option>
+                                   @endforeach
                                 @endcomponent
                             </div>
                             {{--<div class="form-group col-md-3">--}}

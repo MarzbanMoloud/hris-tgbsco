@@ -1,4 +1,4 @@
-<div class="form-group {{ $classWrapper ?? '' }}">
+<div class="form-group {{ $classWrapper ?? '' }}" style="{{ $style ?? '' }}">
     <input type="submit"
            name="{{ $name ?? '' }}"
            id="{{ $id ?? '' }}"

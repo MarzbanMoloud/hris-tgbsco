@@ -14,7 +14,9 @@ class AddDeliveryDateToGuaranteesTable extends Migration
     public function up()
     {
         Schema::table('guarantees', function (Blueprint $table) {
-            //
+            $table->string('delivery_date')->nullable();
+            $table->string('type')->nullable();
+            $table->string('use_case')->nullable();
         });
     }
 

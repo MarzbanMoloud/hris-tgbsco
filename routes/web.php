@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     /*---------------------------------- Personnel ----------------------------------*/
+    Route::get('personnels/list/{status}', 'PersonnelController@list')->name('personnels.list');
     Route::get('personnels/filter', 'PersonnelController@filter')->name('personnels.filter');
     Route::get('personnels/restore/{personnel}', 'PersonnelController@restore')->name('personnels.restore');
     Route::resource('personnels', 'PersonnelController');
@@ -61,18 +62,22 @@ Route::middleware('auth')->group(function () {
     Route::resource('salaries', 'SalaryController');
 
     /*---------------------------------- Loan ----------------------------------*/
+    Route::get('loans/filter', 'LoanController@filter')->name('loan.filter');
     Route::get('loans/times/{personnel}', 'LoanController@timesLoanToDedicatedPersonnel')->name('loan.times');
     Route::resource('loans', 'LoanController');
 
     /*---------------------------------- Help ----------------------------------*/
+    Route::get('helps/filter', 'HelpController@filter')->name('helps.filter');
     Route::get('helps/times/{personnel}', 'HelpController@timesHelpToDedicatedPersonnel')->name('helps.times');
     Route::resource('helps', 'HelpController');
 
     /*---------------------------------- Guarantee ----------------------------------*/
+    Route::get('guarantees/filter', 'GuaranteeController@filter')->name('guarantees.filter');
     Route::get('guarantees/times/{personnel}', 'GuaranteeController@timesGuaranteeToDedicatedPersonnel')->name('guarantees.times');
     Route::resource('guarantees', 'GuaranteeController');
 
     /*---------------------------------- JobCertificate ----------------------------------*/
+    Route::get('jobCertificates/filter', 'JobCertificateController@filter')->name('jobCertificates.filter');
     Route::get('jobCertificates/times/{personnel}', 'JobCertificateController@timesJobCertificateToDedicatedPersonnel')->name('jobCertificates.times');
     Route::resource('jobCertificates', 'JobCertificateController');
 });

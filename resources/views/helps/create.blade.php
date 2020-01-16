@@ -39,6 +39,19 @@
                     <form action="{{ route('helps.store') }}" method="post" id="create-help-form">
                         @csrf
 
+                        {{--PersonnelStatus--}}
+                        @component('components.select-option')
+                            @slot('name', 'personnel_status')
+                            @slot('id', 'personnel_status')
+                            @slot('label', 'وضعیت پرسنل')
+                            @slot('classWrapper', 'col-md-4')
+                            @foreach(\App\Personnel::STATUSES as $key => $status)
+                                @if($key != \App\Personnel::DELETED)
+                                    <option value="{{ $key }}"> {{ $status }} </option>
+                                @endif
+                            @endforeach
+                        @endcomponent
+
                         {{--Personnel--}}
                         @component('components.select-option')
                             @slot('name', 'personnelId')
@@ -218,6 +231,25 @@
 
                 $('#frequently-facility-btn').on('click', function () {
                     $('#create-help-form').submit();
+                });
+            });
+
+            /*-------------------- Load personnel list based on selected personnel status --------------------*/
+            $("#personnel_status").change(function() {
+                $('#personnelId').empty();
+                var selected_status = $('#personnel_status').children("option:selected").val();
+
+                $.ajax({
+                    type: "get",
+                    url: "{{ URL::to('personnels/list') }}"+ '/' + selected_status,
+                    success: function(personnels){
+                        $.each( personnels, function( key, personnel ) {
+                            $('#personnelId').append('<option value="'+ personnel.id +'">' + personnel.full_name + '</option>');
+                        });
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
                 });
             });
         </script>

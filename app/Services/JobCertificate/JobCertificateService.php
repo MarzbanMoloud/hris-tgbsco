@@ -10,6 +10,7 @@ namespace App\Services\JobCertificate;
 
 
 use App\JobCertificate;
+use App\Services\DateConverter\DateConverter;
 use App\ValueObject\CreateJobCertificate;
 use App\ValueObject\UpdateJobCertificate;
 
@@ -69,8 +70,36 @@ class JobCertificateService
      */
     public function timesJobCertificateToDedicatedPersonnel($personnelId)
     {
-        return JobCertificate::where('personnel_id', $personnelId)
-            //->where('status', JobCertificate::ENABLE)
-            ->count();
+        $jobCertificates = JobCertificate::where('personnel_id', $personnelId)->get();
+
+        $count = 0;
+
+        if (! empty($jobCertificates)){
+
+            $currentYear = DateConverter::getYearJalali(now()->timestamp);
+
+            foreach ($jobCertificates as $key => $jobCertificate){
+                if (DateConverter::getYearJalali($jobCertificate->receive_date) == $currentYear){
+                    ++$count;
+                }
+            }
+
+        }
+        return $count;
+    }
+
+    /**
+     * @param $personnelId
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function filterByPersonnel($personnelId)
+    {
+        $jobCertificates = JobCertificate::query()
+            ->has('personnel');
+        if (! empty($personnelId)){
+            $jobCertificates = $jobCertificates->where('personnel_id', $personnelId);
+        }
+        return $jobCertificates->orderBy('updated_at', 'DESC')
+            ->paginate();
     }
 }

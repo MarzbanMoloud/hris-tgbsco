@@ -11,6 +11,7 @@ use App\Personnel;
 use App\Services\JobCertificate\JobCertificateService;
 use App\ValueObject\CreateJobCertificate;
 use App\ValueObject\UpdateJobCertificate;
+use Illuminate\Http\Request;
 
 
 /**
@@ -138,5 +139,16 @@ class JobCertificateController extends Controller
     {
         $times = $this->service->timesJobCertificateToDedicatedPersonnel($personnel->id);
         return $times;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        $jobCertificates = $this->service->filterByPersonnel($request->personnelId);
+
+        return view(self::PREFIX_VIEW . 'index', compact('jobCertificates'));
     }
 }

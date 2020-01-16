@@ -50,8 +50,11 @@
                                     @slot('id', 'personnelStatus')
                                     @slot('label', 'وضعیت پرسنل:')
                                     <option value=""></option>
-                                    <option value="1">فعال</option>
-                                    <option value="0">غیرفعال</option>
+                                    @foreach(\App\Personnel::STATUSES as $key => $status)
+                                        @if($key != \App\Personnel::DELETED)
+                                            <option value="{{ $key }}">{{ $status }}</option>
+                                        @endif
+                                    @endforeach
                                 @endcomponent
                             </div>
                         </div>

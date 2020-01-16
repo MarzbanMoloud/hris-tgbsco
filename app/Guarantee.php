@@ -27,6 +27,16 @@ class Guarantee extends Model
         self::DISABLE => 'غیر فعال',
     ];
 
+    const USE_CASES = [
+        0 => 'استخدام',
+        1 => 'وام'
+    ];
+
+    const TYPES = [
+        0 => 'چک',
+        1 => 'سفته',
+    ];
+
     /**
      * @var array
      */

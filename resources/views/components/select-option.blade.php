@@ -1,7 +1,7 @@
 <div class="form-group {{ $classWrapper ?? '' }}">
 
     @component('components.label')
-        @slot('label', $label)
+        @slot('label', $label ?? '')
     @endcomponent
 
     <select class="form-control {{ $class ?? '' }}"

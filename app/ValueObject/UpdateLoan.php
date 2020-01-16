@@ -61,6 +61,18 @@ class UpdateLoan
         return null;
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function getSettlementDate()
+    {
+        if (!is_null($this->request->settlement_date)) {
+            return DateConverter::toTimestamp($this->request->settlement_date);
+        }
+        return null;
+    }
+
 //    /**
 //     * @return mixed
 //     */

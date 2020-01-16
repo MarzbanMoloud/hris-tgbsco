@@ -1,1 +1,1 @@
-<label for="{{ $id ?? '' }}">{{ $label }}</label>
+<label for="{{ $id ?? '' }}">{{ $label ?? '' }}</label>

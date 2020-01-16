@@ -39,6 +39,19 @@
                     <form action="{{ route('guarantees.store') }}" method="post" id="create-guarantee-form">
                         @csrf
 
+                        {{--PersonnelStatus--}}
+                        @component('components.select-option')
+                            @slot('name', 'personnel_status')
+                            @slot('id', 'personnel_status')
+                            @slot('label', 'وضعیت پرسنل')
+                            @slot('classWrapper', 'col-md-4')
+                            @foreach(\App\Personnel::STATUSES as $key => $status)
+                                @if($key != \App\Personnel::DELETED)
+                                    <option value="{{ $key }}"> {{ $status }} </option>
+                                @endif
+                            @endforeach
+                        @endcomponent
+
                         {{--Personnel--}}
                         @component('components.select-option')
                             @slot('name', 'personnelId')
@@ -71,6 +84,39 @@
                             @slot('label', 'تاریخ دریافت')
                             @slot('classWrapper', 'col-md-4')
                             @slot('required', 'required')
+                        @endcomponent
+
+                        {{--DeliveryDate--}}
+                        @component('components.input')
+                            @slot('type', 'text')
+                            @slot('name', 'delivery_date')
+                            @slot('id', 'delivery_date')
+                            @slot('label', 'تاریخ تحویل')
+                            @slot('classWrapper', 'col-md-4')
+                        @endcomponent
+
+                        {{--UseCase--}}
+                        @component('components.select-option')
+                            @slot('name', 'use_case')
+                            @slot('id', 'use_case')
+                            @slot('label', 'مورد استفاده ضمانت')
+                            @slot('classWrapper', 'col-md-4')
+                            <option value=""></option>
+                            @foreach(\App\Guarantee::USE_CASES as $key => $useCase)
+                                <option value="{{ $key }}"> {{ $useCase }} </option>
+                            @endforeach
+                        @endcomponent
+
+                        {{--Type--}}
+                        @component('components.select-option')
+                            @slot('name', 'type')
+                            @slot('id', 'type')
+                            @slot('label', 'نوع ضمانت')
+                            @slot('classWrapper', 'col-md-4')
+                            <option value=""></option>
+                            @foreach(\App\Guarantee::TYPES as $key => $type)
+                                <option value="{{ $key }}"> {{ $type }} </option>
+                            @endforeach
                         @endcomponent
 
                         {{--Status--}}
@@ -114,6 +160,7 @@
                 , gotoToday: true
             };
             kamaDatepicker('receive_date', customOptions);
+            kamaDatepicker('delivery_date', customOptions);
 
             /*-------------------- PriceFormat --------------------*/
             $('#amount').on({
@@ -218,6 +265,26 @@
 
                 $('#frequently-facility-btn').on('click', function () {
                     $('#create-guarantee-form').submit();
+                });
+            });
+
+            /*-------------------- Load personnel list based on selected personnel status --------------------*/
+            $("#personnel_status").change(function() {
+                $('#personnelId').empty();
+
+                var selected_status = $( this ).children("option:selected").val();
+
+                $.ajax({
+                    type: "get",
+                    url: "{{ URL::to('personnels/list') }}"+ '/' + selected_status,
+                    success: function(personnels){
+                        $.each( personnels, function( key, personnel ) {
+                            $('#personnelId').append('<option value="'+ personnel.id +'">' + personnel.full_name + '</option>');
+                        });
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
                 });
             });
         </script>

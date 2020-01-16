@@ -10,6 +10,7 @@ namespace App\Services\Loan;
 
 
 use App\Loan;
+use App\Services\DateConverter\DateConverter;
 use App\ValueObject\CreateLoan;
 use App\ValueObject\UpdateLoan;
 
@@ -46,6 +47,7 @@ class LoanService
             'personnel_id' => $loan->getPersonnelId(),
             'amount' => $loan->getAmount(),
             'receive_date' => $loan->getReceiveDate(),
+            'settlement_date' => $loan->getSettlementDate(),
             //'status' => $loan->getStatus(),
         ]);
     }
@@ -61,6 +63,7 @@ class LoanService
             'personnel_id' => $updateLoan->getPersonnelId(),
             'amount' => $updateLoan->getAmount(),
             'receive_date' => $updateLoan->getReceiveDate(),
+            'settlement_date' => $updateLoan->getSettlementDate(),
             //'status' => $updateLoan->getStatus(),
         ]);
     }
@@ -71,8 +74,36 @@ class LoanService
      */
     public function timesLoanToDedicatedPersonnel($personnelId)
     {
-        return Loan::where('personnel_id', $personnelId)
-            //->where('status', Loan::ENABLE)
-            ->count();
+        $loans = Loan::where('personnel_id', $personnelId)->get();
+
+        $count = 0;
+
+        if (! empty($loans)){
+
+            $currentYear = DateConverter::getYearJalali(now()->timestamp);
+
+            foreach ($loans as $key => $loan){
+                if (DateConverter::getYearJalali($loan->receive_date) == $currentYear){
+                    ++$count;
+                }
+            }
+
+        }
+        return $count;
+    }
+
+    /**
+     * @param $personnelId
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function filterByPersonnel($personnelId)
+    {
+        $loans = Loan::query()
+            ->has('personnel');
+        if (! empty($personnelId)){
+            $loans = $loans->where('personnel_id', $personnelId);
+        }
+        return $loans->orderBy('updated_at', 'DESC')
+            ->paginate();
     }
 }

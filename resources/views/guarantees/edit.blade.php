@@ -50,9 +50,9 @@
                             @slot('id', 'personnelId')
                             @slot('label', 'پرسنل')
                             @foreach($personnelService->all() as $key => $personnel)
-                                <option value="{{ $personnel->id }}"
-                                    {{ ($personnel->id == $guarantee->personnel_id) ? "selected" : '' }}
-                                > {{ $personnel->full_name }} </option>
+                                @if($personnel->id == $guarantee->personnel_id)
+                                <option value="{{ $personnel->id }}" selected> {{ $personnel->full_name }} </option>
+                                @endif
                             @endforeach
                         @endcomponent
 
@@ -80,6 +80,46 @@
                                 @slot('value', $dateConverter::toJalali($guarantee->receive_date))
                             @endif
                             @slot('required', 'required')
+                        @endcomponent
+
+                        {{--DeliveryDate--}}
+                        @component('components.input')
+                            @slot('type', 'text')
+                            @slot('name', 'delivery_date')
+                            @slot('id', 'delivery_date')
+                            @slot('label', 'تاریخ تحویل')
+                            @if(! is_null($guarantee->delivery_date))
+                                @slot('value', $dateConverter::toJalali($guarantee->delivery_date))
+                            @endif
+                            @slot('classWrapper', 'col-md-4')
+                        @endcomponent
+
+                        {{--UseCase--}}
+                        @component('components.select-option')
+                            @slot('name', 'use_case')
+                            @slot('id', 'use_case')
+                            @slot('label', 'مورد استفاده ضمانت')
+                            @slot('classWrapper', 'col-md-4')
+                            <option value=""></option>
+                            @foreach(\App\Guarantee::USE_CASES as $key => $useCase)
+                                <option value="{{ $key }}"
+                                        {{ ($guarantee->use_case == $key) ? "selected" : "" }}
+                                > {{ $useCase }} </option>
+                            @endforeach
+                        @endcomponent
+
+                        {{--Type--}}
+                        @component('components.select-option')
+                            @slot('name', 'type')
+                            @slot('id', 'type')
+                            @slot('label', 'نوع ضمانت')
+                            @slot('classWrapper', 'col-md-4')
+                            <option value=""></option>
+                            @foreach(\App\Guarantee::TYPES as $key => $type)
+                                <option value="{{ $key }}"
+                                        {{ ($guarantee->type == $key) ? "selected" : "" }}
+                                > {{ $type }} </option>
+                            @endforeach
                         @endcomponent
 
                         {{--Status--}}
@@ -123,6 +163,7 @@
             };
 
             kamaDatepicker('receive_date', customOptions);
+            kamaDatepicker('delivery_date', customOptions);
 
             formatCurrency($('#amount'));
 

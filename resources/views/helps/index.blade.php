@@ -4,6 +4,7 @@
 
     {{--InjectServices - start--}}
     @inject('dateConverter', '\App\Services\DateConverter\DateConverter')
+    @inject('personnelService', '\App\Services\Personnel\PersonnelService')
     {{--InjectServices - end--}}
 
     <!-- /.row -->
@@ -22,6 +23,29 @@
                             ایجاد مساعده جدید
                         </a>
                     </div>
+
+                    <form action="{{ route('helps.filter') }}" method="get">
+                        {{--Personnel--}}
+                        @component('components.select-option')
+                            @slot('name', 'personnelId')
+                            @slot('classWrapper', 'col-md-4')
+                            @slot('id', 'personnelId')
+                            <option value=""></option>
+                            @foreach($personnelService->all() as $key => $personnel)
+                                <option value="{{ $personnel->id }}"
+                                        {{ (request()->has('personnelId') && request()->input('personnelId') == $personnel->id) ? "selected" : '' }}
+                                > {{ $personnel->full_name }} </option>
+                            @endforeach
+                        @endcomponent
+
+                        {{--SubmitButton--}}
+                        @component('components.submit-button')
+                            @slot('id', 'filter_help')
+                            @slot('classWrapper', 'col-md-4')
+                            @slot('value', 'فیلتر')
+                            @slot('style', "margin-top: 18px")
+                        @endcomponent
+                    </form>
                     <hr>
 
                     <!-- tools box -->

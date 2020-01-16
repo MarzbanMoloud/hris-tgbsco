@@ -60,10 +60,10 @@
                                     @slot('label', 'وضعیت پرسنل:')
                                     <option value=""></option>
                                     <option value="1"
-                                            {{ ( (isset(request()->personnelStatus)) && (1 == request()->personnelStatus) ) ? "selected" : '' }}
+                                            {{ ( (isset(request()->personnelStatus)) && (\App\Personnel::ACTIVE == request()->personnelStatus) ) ? "selected" : '' }}
                                     >فعال</option>
                                     <option value="0"
-                                            {{ ( (isset(request()->personnelStatus)) && (0 == request()->personnelStatus) ) ? "selected" : '' }}
+                                            {{ ( (isset(request()->personnelStatus)) && (\App\Personnel::DE_ACTIVE == request()->personnelStatus) ) ? "selected" : '' }}
                                     >غیرفعال</option>
                                 @endcomponent
                             </div>

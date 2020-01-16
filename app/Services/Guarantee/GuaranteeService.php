@@ -10,6 +10,7 @@ namespace App\Services\Guarantee;
 
 
 use App\Guarantee;
+use App\Services\DateConverter\DateConverter;
 use App\ValueObject\CreateGuarantee;
 use App\ValueObject\UpdateGuarantee;
 
@@ -46,6 +47,9 @@ class GuaranteeService
             'personnel_id' => $guarantee->getPersonnelId(),
             'amount' => $guarantee->getAmount(),
             'receive_date' => $guarantee->getReceiveDate(),
+            'delivery_date' => $guarantee->getDeliveryDate(),
+            'type' => $guarantee->getType(),
+            'use_case' => $guarantee->getUseCase(),
             //'status' => $guarantee->getStatus(),
         ]);
     }
@@ -61,6 +65,9 @@ class GuaranteeService
             'personnel_id' => $updateGuarantee->getPersonnelId(),
             'amount' => $updateGuarantee->getAmount(),
             'receive_date' => $updateGuarantee->getReceiveDate(),
+            'delivery_date' => $updateGuarantee->getDeliveryDate(),
+            'type' => $updateGuarantee->getType(),
+            'use_case' => $updateGuarantee->getUseCase(),
             //'status' => $updateGuarantee->getStatus(),
         ]);
     }
@@ -71,8 +78,36 @@ class GuaranteeService
      */
     public function timesGuaranteeToDedicatedPersonnel($personnelId)
     {
-        return Guarantee::where('personnel_id', $personnelId)
-            //->where('status', Guarantee::ENABLE)
-            ->count();
+        $guarantees = Guarantee::where('personnel_id', $personnelId)->get();
+
+        $count = 0;
+
+        if (! empty($guarantees)){
+
+            $currentYear = DateConverter::getYearJalali(now()->timestamp);
+
+            foreach ($guarantees as $key => $guarantee){
+                if (DateConverter::getYearJalali($guarantee->receive_date) == $currentYear){
+                    ++$count;
+                }
+            }
+
+        }
+        return $count;
+    }
+
+    /**
+     * @param $personnelId
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function filterByPersonnel($personnelId)
+    {
+        $guarantees = Guarantee::query()
+            ->has('personnel');
+        if (! empty($personnelId)){
+            $guarantees = $guarantees->where('personnel_id', $personnelId);
+        }
+        return $guarantees->orderBy('updated_at', 'DESC')
+            ->paginate();
     }
 }

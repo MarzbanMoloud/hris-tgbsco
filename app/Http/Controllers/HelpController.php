@@ -11,6 +11,7 @@ use App\Personnel;
 use App\Services\Help\HelpService;
 use App\ValueObject\CreateHelp;
 use App\ValueObject\UpdateHelp;
+use Illuminate\Http\Request;
 
 
 /**
@@ -138,5 +139,16 @@ class HelpController extends Controller
     {
         $times = $this->service->timesHelpToDedicatedPersonnel($personnel->id);
         return $times;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        $helps = $this->service->filterByPersonnel($request->personnelId);
+
+        return view(self::PREFIX_VIEW . 'index', compact('helps'));
     }
 }

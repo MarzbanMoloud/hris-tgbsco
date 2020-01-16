@@ -61,6 +61,33 @@ class UpdateGuarantee
         return null;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDeliveryDate()
+    {
+        if (!is_null($this->request->delivery_date)) {
+            return DateConverter::toTimestamp($this->request->delivery_date);
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->request->type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUseCase()
+    {
+        return $this->request->use_case;
+    }
+
 //    /**
 //     * @return mixed
 //     */

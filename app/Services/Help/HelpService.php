@@ -10,6 +10,7 @@ namespace App\Services\Help;
 
 
 use App\Help;
+use App\Services\DateConverter\DateConverter;
 use App\ValueObject\CreateHelp;
 use App\ValueObject\UpdateHelp;
 
@@ -71,8 +72,32 @@ class HelpService
      */
     public function timesHelpToDedicatedPersonnel($personnelId)
     {
-        return Help::where('personnel_id', $personnelId)
-            //->where('status', Help::ENABLE)
-            ->count();
+        $helps = Help::where('personnel_id', $personnelId)->get();
+
+        $count = 0;
+
+        if (! empty($helps)){
+
+            $currentYear = DateConverter::getYearJalali(now()->timestamp);
+
+            foreach ($helps as $key => $help){
+                if (DateConverter::getYearJalali($help->receive_date) == $currentYear){
+                    ++$count;
+                }
+            }
+
+        }
+        return $count;
+    }
+
+    public function filterByPersonnel($personnelId)
+    {
+        $helps = Help::query()
+            ->has('personnel');
+        if (! empty($personnelId)){
+            $helps = $helps->where('personnel_id', $personnelId);
+        }
+        return $helps->orderBy('updated_at', 'DESC')
+            ->paginate();
     }
 }

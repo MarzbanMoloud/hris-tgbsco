@@ -16,7 +16,7 @@
             <div class="box box-info">
                 <div class="box-header">
                     <i class="fa fa-plus"></i>
-                    <h3 class="box-title">  ویرایش پرسنل {{ $personnel->personnel_code }} </h3>
+                    <h3 class="box-title">  ویرایش پرسنل {{ $personnel->id }} </h3>
 
                     <hr>
                     {{--List--}}
