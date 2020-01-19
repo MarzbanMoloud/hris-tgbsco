@@ -422,12 +422,12 @@
                                         @slot('value', $personnel->phone_number)
                                     @endcomponent
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     {{--Address--}}
                                     @component('components.textarea')
                                         @slot('name', 'address')
                                         @slot('id', 'address')
-                                        @slot('rows', 2)
+                                        @slot('rows', 1)
                                         @slot('label', 'آدرس محل سکونت')
                                         @slot('value', $personnel->address)
                                     @endcomponent
