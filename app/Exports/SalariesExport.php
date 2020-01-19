@@ -4,7 +4,7 @@
 namespace App\Exports;
 
 
-use App\Services\Personnel\PersonnelService;
+use App\Services\Salary\SalaryService;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -13,11 +13,7 @@ use Maatwebsite\Excel\Events\BeforeExport;
 use Maatwebsite\Excel\Events\AfterSheet;
 
 
-/**
- * Class FilterPersonnelExport
- * @package App\Exports
- */
-class FilterPersonnelExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvents
+class SalariesExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvents
 {
     /**
      * @var
@@ -53,7 +49,7 @@ class FilterPersonnelExport implements FromArray, WithHeadings, ShouldAutoSize, 
      */
     public function array(): array
     {
-        $filter = (new PersonnelService())->filter($this->request, false);
+        $filter = (new SalaryService())->filter($this->request, false);
 
         return $this->transform($filter);
     }
@@ -68,6 +64,7 @@ class FilterPersonnelExport implements FromArray, WithHeadings, ShouldAutoSize, 
         foreach ($filter as $index => $personnel){
             foreach ($this->filters as $key => $item){
                 $data[$index]['id'] = $personnel->id;
+
                 switch ($item) {
                     case ('marital_status'):
                         $data[$index]['marital_status'] = (! is_null($personnel->marital_status)) ? \App\Personnel::MARITAL_STATUS[$personnel->marital_status] : '';
@@ -110,6 +107,8 @@ class FilterPersonnelExport implements FromArray, WithHeadings, ShouldAutoSize, 
                 }
                 $data[$index]['projects'] = $temp;
             }
+            $data[$index]['insurance_amount'] = number_format($personnel->salary()->first()['insurance_amount']) ?? '';
+            $data[$index]['benefit_of_amount'] = number_format($personnel->salary()->first()['benefit_of_amount']) ?? '';
         }
         return $data;
     }
@@ -120,12 +119,15 @@ class FilterPersonnelExport implements FromArray, WithHeadings, ShouldAutoSize, 
     public function headings(): array
     {
         $filterHeading = array();
+
         foreach ($this->filters as $key => $item) {
             array_push($filterHeading, (new \App\Personnel())->filters[$item]);
         }
         if ($this->request->has('projects')) {
             array_push($filterHeading, 'پروژه');
         }
+        array_push($filterHeading, 'مبلغ بیمه ای');
+        array_push($filterHeading, 'مبلغ حقوق و مزایا');
 
         return $filterHeading;
         //return array_merge(['شناسه'], $filterHeading);

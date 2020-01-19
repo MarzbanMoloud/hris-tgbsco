@@ -30,6 +30,7 @@ class Personnel extends Model
      * @var array
      */
     public $filters = [
+        'id' => 'شناسه',
         'first_name' => 'نام',
         'last_name' => 'نام خانوادگی',
         'father_name' => 'نام پدر',
@@ -44,7 +45,7 @@ class Personnel extends Model
         'education_degree' => 'مدرک تحصیلی',
         'major' => 'رشته تحصیلی',
         'education_location' => 'محل تحصیل',
-        'central_cost_id' => 'مرکز هزینه',
+        //'central_cost_id' => 'مرکز هزینه',
         'job_id' => 'شغل',
         'user_id' => 'کاربر',
         'updated_at' => 'اخرین ویرایش',

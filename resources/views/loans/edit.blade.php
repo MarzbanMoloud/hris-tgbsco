@@ -89,6 +89,9 @@
                             @slot('id', 'settlement_date')
                             @slot('label', 'تاریخ تسویه')
                             @slot('classWrapper', 'col-md-4')
+                            @if(! is_null($loan->receive_date))
+                                @slot('value', $dateConverter::toJalali($loan->settlement_date))
+                            @endif
                         @endcomponent
 
                         {{--Status--}}

@@ -22,6 +22,11 @@
                     <form action="{{ route('salaries.filter') }}" method="get" style="background-color: #ddd; border-radius: 5px; padding: 10px">
                         {{--@csrf--}}
 
+                        <button type="submit" name="export-filter" class="btn btn-primary btn-xs">
+                            <i class="fa fa-file-excel-o"></i>
+                            خروجی اکسل
+                        </button>
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 @component('components.select2-option')

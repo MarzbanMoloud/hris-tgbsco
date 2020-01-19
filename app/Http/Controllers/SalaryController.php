@@ -4,12 +4,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Exports\SalariesExport;
 use App\Personnel;
 use App\Salary;
 use App\Services\Personnel\PersonnelService;
 use App\Services\Salary\SalaryService;
 use App\ValueObject\CreateSalary;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 /**
@@ -125,6 +127,10 @@ class SalaryController extends Controller
      */
     public function filter(Request $request)
     {
+        if ($request->has('export-filter')){
+            $filters = (isset($request->filter)) ? $request->filter : PersonnelService::BASIC_FILTERS;
+            return Excel::download(new SalariesExport($request, $filters), 'filter-salaries-report.xlsx');
+        }
         $filters = (isset($request->filter)) ? array_merge(['id'], $request->filter) : PersonnelService::BASIC_FILTERS;
         $personnels = $this->service->filter($request, true);
 
