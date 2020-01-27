@@ -16,6 +16,7 @@
                     <h3 class="box-title"> لیست تضامین </h3>
 
                     <hr>
+                    @role([config('roleconst.admin'), config('roleconst.normal')])
                     {{--Create--}}
                     <div class="form-group">
                         <a href="{{ route('guarantees.create') }}" class="btn btn-success btn-xs">
@@ -23,6 +24,7 @@
                             ایجاد ضمانت جدید
                         </a>
                     </div>
+                    @endrole
 
                     <form action="{{ route('guarantees.filter') }}" method="get">
                         {{--Personnel--}}
@@ -66,16 +68,19 @@
                             {{--<th>وضعیت</th>--}}
                             <th>کاربر</th>
                             <th>آخرین ویرایش</th>
+                            @role([config('roleconst.admin'), config('roleconst.normal')])
                             <th>عملیات</th>
+                            @endrole
                         </tr>
                         @foreach($guarantees as $key => $guarantee)
                             <tr>
                                 <td>{{ $guarantee->id }}</td>
                                 <td>{{ $guarantee->personnel()->first()->full_name }}</td>
                                 <td>{{ $guarantee->personnel()->first()->personnel_code }}</td>
-{{--                                <td>{{ \App\Guarantee::STATUSES[$guarantee->status] ?? '' }}</td>--}}
+                                {{--<td>{{ \App\Guarantee::STATUSES[$guarantee->status] ?? '' }}</td>--}}
                                 <td>{{ \App\User::find($guarantee->user_id)->name ?? '' }}</td>
                                 <td>{{ $dateConverter::toJalali($guarantee->updated_at) }}</td>
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <td>
                                     <a href="{{ route('guarantees.edit', ['guarantee' => $guarantee->id]) }}" class="btn btn-primary btn-xs" title="ویرایش">
                                         <i class="fa fa-edit"></i>&nbsp; ویرایش &nbsp;
@@ -84,6 +89,7 @@
                                         <i class="fa fa-trash"></i>&nbsp; حذف &nbsp;
                                     </a>
                                 </td>
+                                @endrole
                             </tr>
                         @endforeach
                     </table>

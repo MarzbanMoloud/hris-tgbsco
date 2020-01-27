@@ -18,6 +18,7 @@
                     <h3 class="box-title"> لیست پرسنل </h3>
 
                     <hr>
+                    @role([config('roleconst.admin'), config('roleconst.normal')])
                     {{--ImportExportExcelAndCreate--}}
                     <div class="form-group">
                         <a href="{{ route('personnels.create') }}" class="btn btn-success btn-xs">
@@ -29,8 +30,8 @@
                             <i class="fa fa-file-excel-o"></i>
                             وارد کردن اکسل
                         </a>
-
                     </div>
+                    @endrole
                     <hr>
 
                     <form action="{{ route('personnels.filter') }}" method="get" style="background-color: #ddd; border-radius: 5px; padding: 10px">
@@ -181,7 +182,9 @@
                                 <th>پروژه</th>
                             @endif
 
+                            @role([config('roleconst.admin'), config('roleconst.normal')])
                             <th>عملیات</th>
+                            @endrole
                         </tr>
                         @foreach($personnels as $key => $personnel)
                             <tr>
@@ -244,6 +247,8 @@
                                         @endforeach
                                     </td>
                                 @endif
+
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <td>
                                     @if(isset(request()->personnelStatus) && request()->personnelStatus == "2")
                                         <a href="{{ route('personnels.restore', ['personnel' => $personnel->id]) }}" class="btn btn-success btn-xs" title="بازیابی">
@@ -258,6 +263,7 @@
                                         </a>
                                     @endif
                                 </td>
+                                @endrole
                             </tr>
                         @endforeach
                     </table>

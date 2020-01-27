@@ -48,6 +48,7 @@
                             @slot('name', 'personnelId')
                             @slot('classWrapper', 'col-md-4')
                             @slot('id', 'personnelId')
+                            @slot('requiredSign', "*")
                             @slot('label', 'پرسنل')
                             @foreach($personnelService->all() as $key => $personnel)
                                 @if($personnel->id == $help->personnel_id)
@@ -59,6 +60,7 @@
                         {{--Amount--}}
                         <div class="form-group col-md-4">
                             <label for="amount">مبلغ</label>
+                            <span style="color: red">*</span>
                             <input class="form-control"
                                    type="text"
                                    name="amount"
@@ -76,6 +78,7 @@
                             @slot('id', 'receive_date')
                             @slot('label', 'تاریخ دریافت')
                             @slot('classWrapper', 'col-md-4')
+                            @slot('requiredSign', "*")
                             @if(! is_null($help->receive_date))
                                 @slot('value', $dateConverter::toJalali($help->receive_date))
                             @endif

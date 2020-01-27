@@ -44,6 +44,7 @@
                             @slot('type', 'text')
                             @slot('id', 'title')
                             @slot('label', 'عنوان')
+                            @slot('requiredSign', "*")
                             @slot('value', $job->title)
                             @slot('classWrapper', 'col-md-4')
                             @slot('required', 'required')

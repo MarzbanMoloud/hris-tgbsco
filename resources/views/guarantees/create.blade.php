@@ -57,6 +57,7 @@
                             @slot('name', 'personnelId')
                             @slot('id', 'personnelId')
                             @slot('label', 'پرسنل')
+                            @slot('requiredSign', "*")
                             @slot('classWrapper', 'col-md-4')
                             @foreach($personnelService->all() as $key => $personnel)
                                 <option value="{{ $personnel->id }}"> {{ $personnel->full_name }} </option>
@@ -66,6 +67,7 @@
                         {{--Amount--}}
                         <div class="form-group col-md-4">
                             <label for="amount">مبلغ</label>
+                            <span style="color: red">*</span>
                             <input class="form-control"
                                    type="text"
                                    name="amount"
@@ -82,6 +84,7 @@
                             @slot('name', 'receive_date')
                             @slot('id', 'receive_date')
                             @slot('label', 'تاریخ دریافت')
+                            @slot('requiredSign', "*")
                             @slot('classWrapper', 'col-md-4')
                             @slot('required', 'required')
                         @endcomponent

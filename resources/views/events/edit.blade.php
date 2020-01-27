@@ -49,6 +49,7 @@
                             @slot('id', 'title')
                             @slot('label', 'عنوان')
                             @slot('value', $event->title)
+                            @slot('requiredSign', "*")
                             @slot('classWrapper', 'col-md-6')
                             @slot('required', 'required')
                         @endcomponent
@@ -59,6 +60,7 @@
                             @slot('name', 'alert_date')
                             @slot('id', 'alert_date')
                             @slot('label', 'تاریخ رویداد')
+                            @slot('requiredSign', "*")
                             @slot('classWrapper', 'col-md-6')
                             @if(! is_null($event->alert_date))
                                 @slot('value', $dateConverter::toJalali($event->alert_date))

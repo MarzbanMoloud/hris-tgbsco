@@ -16,6 +16,7 @@
                     <h3 class="box-title"> لیست گواهی های شغلی </h3>
 
                     <hr>
+                    @role([config('roleconst.admin'), config('roleconst.normal')])
                     {{--Create--}}
                     <div class="form-group">
                         <a href="{{ route('jobCertificates.create') }}" class="btn btn-success btn-xs">
@@ -23,6 +24,7 @@
                             ایجاد گواهی شغلی جدید
                         </a>
                     </div>
+                    @endrole
 
                     <form action="{{ route('jobCertificates.filter') }}" method="get">
                         {{--Personnel--}}
@@ -66,7 +68,9 @@
                             {{--<th>وضعیت</th>--}}
                             <th>کاربر</th>
                             <th>آخرین ویرایش</th>
+                            @role([config('roleconst.admin'), config('roleconst.normal')])
                             <th>عملیات</th>
+                            @endrole
                         </tr>
                         @foreach($jobCertificates as $key => $jobCertificate)
                             <tr>
@@ -76,6 +80,7 @@
 {{--                                <td>{{ \App\Loan::STATUSES[$jobCertificate->status] ?? '' }}</td>--}}
                                 <td>{{ \App\User::find($jobCertificate->user_id)->name ?? '' }}</td>
                                 <td>{{ $dateConverter::toJalali($jobCertificate->updated_at) }}</td>
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <td>
                                     <a href="{{ route('jobCertificates.edit', ['jobCertificate' => $jobCertificate->id]) }}" class="btn btn-primary btn-xs" title="ویرایش">
                                         <i class="fa fa-edit"></i>&nbsp; ویرایش &nbsp;
@@ -84,6 +89,7 @@
                                         <i class="fa fa-trash"></i>&nbsp; حذف &nbsp;
                                     </a>
                                 </td>
+                                @endrole
                             </tr>
                         @endforeach
                     </table>

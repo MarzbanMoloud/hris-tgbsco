@@ -37,6 +37,7 @@ class HelpController extends Controller
     public function __construct(HelpService $service)
     {
         $this->service = $service;
+        $this->middleware('role:admin|normal')->except(['index', 'filter']);
     }
 
     /**

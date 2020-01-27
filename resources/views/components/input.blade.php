@@ -3,6 +3,7 @@
     @component('components.label')
         @slot('label', $label)
         @slot('id', $id ?? '')
+        @slot('requiredSign', $requiredSign ?? '')
     @endcomponent
 
     <input type="{{ $type }}"

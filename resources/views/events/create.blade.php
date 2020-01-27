@@ -41,6 +41,7 @@
                             @slot('type', 'text')
                             @slot('id', 'title')
                             @slot('label', 'عنوان')
+                            @slot('requiredSign', "*")
                             @slot('classWrapper', 'col-md-6')
                             @slot('required', 'required')
                         @endcomponent
@@ -50,6 +51,7 @@
                             @slot('type', 'text')
                             @slot('name', 'alert_date')
                             @slot('id', 'alert_date')
+                            @slot('requiredSign', "*")
                             @slot('classWrapper', 'col-md-6')
                             @slot('label', 'تاریخ رویداد')
                         @endcomponent

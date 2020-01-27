@@ -45,6 +45,7 @@
                             @slot('type', 'text')
                             @slot('id', 'title')
                             @slot('label', 'عنوان')
+                            @slot('requiredSign', "*")
                             @slot('classWrapper', 'col-md-4')
                             @slot('value', $organizationalUnit->title)
                         @endcomponent

@@ -37,6 +37,7 @@ class JobCertificateController extends Controller
     public function __construct(JobCertificateService $service)
     {
         $this->service = $service;
+        $this->middleware('role:admin|normal')->except(['index', 'filter']);
     }
 
     /**

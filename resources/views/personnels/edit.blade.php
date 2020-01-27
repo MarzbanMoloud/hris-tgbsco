@@ -26,12 +26,14 @@
                             لیست پرسنل
                         </a>
                     </div>
+                    @role('admin')
                     @component('components.submit-button')
                         @slot('name', 'submit_amounts')
                         @slot('class', 'btn btn-primary btn-xs submit_amounts')
                         @slot('value', 'اطلاعات حقوقی')
                         @slot('dataId', $personnel->id)
                     @endcomponent
+                    @endrole
                     <hr>
 
                     <!-- tools box -->
@@ -84,7 +86,8 @@
                                         @slot('name', 'first_name')
                                         @slot('type', 'text')
                                         @slot('id', 'first_name')
-                                        @slot('label', 'نام*')
+                                        @slot('label', 'نام')
+                                        @slot('requiredSign', "*")
                                         @slot('value', $personnel->first_name)
                                     @endcomponent
                                 </div>
@@ -94,7 +97,8 @@
                                         @slot('name', 'last_name')
                                         @slot('type', 'text')
                                         @slot('id', 'last_name')
-                                        @slot('label', 'نام خانوادگی*')
+                                        @slot('label', 'نام خانوادگی')
+                                        @slot('requiredSign', "*")
                                         @slot('value', $personnel->last_name)
                                     @endcomponent
                                 </div>
@@ -104,7 +108,8 @@
                                         @slot('name', 'father_name')
                                         @slot('type', 'text')
                                         @slot('id', 'father_name')
-                                        @slot('label', 'نام پدر*')
+                                        @slot('label', 'نام پدر')
+                                        @slot('requiredSign', "*")
                                         @slot('value', $personnel->father_name)
                                     @endcomponent
                                 </div>
@@ -306,7 +311,8 @@
                                         @slot('name', 'personnel_code')
                                         @slot('type', 'number')
                                         @slot('id', 'personnel_code')
-                                        @slot('label', 'کد پرسنلی*')
+                                        @slot('label', 'کد پرسنلی')
+                                        @slot('requiredSign', "*")
                                         @slot('value', $personnel->personnel_code)
                                     @endcomponent
                                 </div>

@@ -18,6 +18,7 @@
                     <h3 class="box-title"> لیست پرسنل </h3>
 
                     <hr>
+                    @role([config('roleconst.admin'), config('roleconst.normal')])
                     {{--ImportExportExcelAndCreate--}}
                     <div class="form-group">
                         <a href="{{ route('personnels.create') }}" class="btn btn-success btn-xs">
@@ -30,6 +31,7 @@
                             وارد کردن اکسل
                         </a>
                     </div>
+                    @endrole
                     <hr>
 
                     <form action="{{ route('personnels.filter') }}" method="get" style="background-color: #ddd; border-radius: 5px; padding: 10px">
@@ -153,7 +155,9 @@
                             <th>شماره پرسنلی</th>
                             <th>کاربر</th>
                             <th>آخرین ویرایش</th>
+                            @role([config('roleconst.admin'), config('roleconst.normal')])
                             <th>عملیات</th>
+                            @endrole
                         </tr>
                         @foreach($personnels as $key => $personnel)
                             <tr>
@@ -163,6 +167,8 @@
                                 <td> {{ $personnel->personnel_code }} </td>
                                 <td>{{ \App\User::find($personnel->user_id)->name }}</td>
                                 <td>{{ (new \App\Services\DateConverter\DateConverter())::toJalali($personnel->updated_at) }}</td>
+
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <td>
                                     <a href="{{ route('personnels.edit', ['personnel' => $personnel->id]) }}" class="btn btn-primary btn-xs" title="ویرایش">
                                         <i class="fa fa-edit"></i>&nbsp; ویرایش &nbsp;
@@ -171,6 +177,7 @@
                                         <i class="fa fa-trash"></i>&nbsp; حذف &nbsp;
                                     </a>
                                 </td>
+                                @endrole
                             </tr>
                         @endforeach
                     </table>

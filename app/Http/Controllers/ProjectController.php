@@ -35,6 +35,7 @@ class ProjectController extends Controller
     public function __construct(ProjectService $service)
     {
         $this->service = $service;
+        $this->middleware('role:admin|normal')->except(['index']);
     }
 
     /**

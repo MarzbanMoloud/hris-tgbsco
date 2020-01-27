@@ -36,6 +36,7 @@ class OrganizationalUnitController extends Controller
     public function __construct(OrganizationalUnitService $service)
     {
         $this->service = $service;
+        $this->middleware('role:admin|normal')->except(['index']);
     }
 
     /**

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 
 use App\Guarantee;
+use App\Http\Requests\CreateGaranteeRequest;
+use App\Http\Requests\UpdateGuaranteeRequest;
 use App\Personnel;
 use App\Services\Guarantee\GuaranteeService;
 use App\ValueObject\CreateGuarantee;
@@ -35,6 +37,7 @@ class GuaranteeController extends Controller
     public function __construct(GuaranteeService $service)
     {
         $this->service = $service;
+        $this->middleware('role:admin|normal')->except(['index', 'filter']);
     }
 
     /**
@@ -61,10 +64,10 @@ class GuaranteeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param CreateGaranteeRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateGaranteeRequest $request)
     {
         try{
             $this->service->create((new CreateGuarantee($request)));
@@ -99,11 +102,11 @@ class GuaranteeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param UpdateGuaranteeRequest $request
      * @param Guarantee $guarantee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Guarantee $guarantee)
+    public function update(UpdateGuaranteeRequest $request, Guarantee $guarantee)
     {
         try{
             $this->service->update((new UpdateGuarantee($request)), $guarantee);

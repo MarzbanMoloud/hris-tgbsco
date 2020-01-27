@@ -31,7 +31,9 @@
                                     <th>ویرایش شده توسط</th>
                                     <th>وضعیت</th>
                                     <th>تاریخ رویداد</th>
+                                    @role([config('roleconst.admin'), config('roleconst.normal')])
                                     <th colspan="2">عملیات</th>
+                                    @endrole
                                 </tr>
                                 @foreach($events as $key => $event)
                                     <tr>
@@ -56,6 +58,7 @@
                                             @endswitch
                                         </td>
                                         <td>{{ (new \App\Services\DateConverter\DateConverter())::toJalali($event->alert_date) }}</td>
+                                        @role([config('roleconst.admin'), config('roleconst.normal')])
                                         <td>
                                             <a href="{{ route('event.success', ['event' => $event->id]) }}">
                                                 <button class="btn btn-success btn-xs" title="تایید"><i class="fa fa-check"></i></button>
@@ -64,6 +67,7 @@
                                                 <button class="btn bg-red btn-xs" title="لغو"><i class="fa fa-close"></i></button>
                                             </a>
                                         </td>
+                                        @endrole
                                     </tr>
                                 @endforeach
                             </table>

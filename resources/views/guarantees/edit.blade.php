@@ -49,6 +49,7 @@
                             @slot('classWrapper', 'col-md-4')
                             @slot('id', 'personnelId')
                             @slot('label', 'پرسنل')
+                            @slot('requiredSign', "*")
                             @foreach($personnelService->all() as $key => $personnel)
                                 @if($personnel->id == $guarantee->personnel_id)
                                 <option value="{{ $personnel->id }}" selected> {{ $personnel->full_name }} </option>
@@ -59,6 +60,7 @@
                         {{--Amount--}}
                         <div class="form-group col-md-4">
                             <label for="amount">مبلغ</label>
+                            <span style="color: red">*</span>
                             <input class="form-control"
                                    type="text"
                                    name="amount"
@@ -75,6 +77,7 @@
                             @slot('name', 'receive_date')
                             @slot('id', 'receive_date')
                             @slot('label', 'تاریخ دریافت')
+                            @slot('requiredSign', "*")
                             @slot('classWrapper', 'col-md-4')
                             @if(! is_null($guarantee->receive_date))
                                 @slot('value', $dateConverter::toJalali($guarantee->receive_date))

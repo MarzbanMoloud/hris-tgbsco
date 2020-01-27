@@ -41,6 +41,7 @@ class PersonnelController extends Controller
     public function __construct(PersonnelService $service)
     {
         $this->service = $service;
+        $this->middleware('role:admin|normal')->except(['index', 'filter']);
     }
 
     /**
@@ -135,6 +136,10 @@ class PersonnelController extends Controller
         }
     }
 
+    /**
+     * @param $personnel
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function restore($personnel)
     {
         try{

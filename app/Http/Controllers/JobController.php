@@ -36,6 +36,7 @@ class JobController extends Controller
     public function __construct(JobService $service)
     {
         $this->service = $service;
+        $this->middleware('role:admin|normal')->except(['index']);
     }
 
     /**

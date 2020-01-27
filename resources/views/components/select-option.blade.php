@@ -2,6 +2,7 @@
 
     @component('components.label')
         @slot('label', $label ?? '')
+        @slot('requiredSign', $requiredSign ?? '')
     @endcomponent
 
     <select class="form-control {{ $class ?? '' }}"

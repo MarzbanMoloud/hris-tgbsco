@@ -11,6 +11,7 @@
                     <h3 class="box-title"> لیست رویدادها </h3>
 
                     <hr>
+                    @role([config('roleconst.admin'), config('roleconst.normal')])
                     {{--Create--}}
                     <div class="form-group">
                         <a href="{{ route('events.create') }}" class="btn btn-success btn-xs">
@@ -18,6 +19,7 @@
                             ایجاد رویداد جدید
                         </a>
                     </div>
+                    @endrole
                     <hr>
 
                     <!-- tools box -->
@@ -38,7 +40,9 @@
                             <th>ایجاد شده توسط</th>
                             <th>ویرایش شده توسط</th>
                             <th>آخرین ویرایش</th>
+                            @role([config('roleconst.admin'), config('roleconst.normal')])
                             <th>عملیات</th>
+                            @endrole
                         </tr>
                         @foreach($events as $key => $event)
                             <tr>
@@ -62,6 +66,7 @@
                                 <td>{{ \App\User::find($event->created_by)->name ?? "-" }}</td>
                                 <td>{{ \App\User::find($event->updated_by)->name ?? "-" }}</td>
                                 <td>{{ (new \App\Services\DateConverter\DateConverter())::toJalali($event->updated_at) }}</td>
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <td>
                                     <a href="{{ route('event.success', ['event' => $event->id]) }}">
                                         <button class="btn btn-success btn-xs" title="تایید"><i class="fa fa-check"></i></button>
@@ -78,6 +83,7 @@
                                         <i class="fa fa-trash"></i>&nbsp; حذف &nbsp;
                                     </a>
                                 </td>
+                                @endrole
                             </tr>
                         @endforeach
                     </table>

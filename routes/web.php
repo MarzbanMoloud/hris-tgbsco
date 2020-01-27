@@ -57,9 +57,11 @@ Route::middleware('auth')->group(function () {
     });
 
     /*---------------------------------- Salary ----------------------------------*/
-    Route::get('salaries/filter', 'SalaryController@filter')->name('salaries.filter');
-    Route::get('salaries/amounts/{personnel}', 'SalaryController@amounts')->name('salaries.amounts');
-    Route::resource('salaries', 'SalaryController');
+    Route::group(['middleware' => ['role:admin']], function() {
+        Route::get('salaries/filter', 'SalaryController@filter')->name('salaries.filter');
+        Route::get('salaries/amounts/{personnel}', 'SalaryController@amounts')->name('salaries.amounts');
+        Route::resource('salaries', 'SalaryController');
+    });
 
     /*---------------------------------- Loan ----------------------------------*/
     Route::get('loans/filter', 'LoanController@filter')->name('loan.filter');

@@ -294,13 +294,17 @@
                                 <i class="fa fa-user"></i> <span>پرسنل</span>
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <li><a class="nav-link" href="{{ route('personnels.create') }}"><i class="fa fa-plus"></i> ایجاد پرسنل </a></li>
+                                @endrole
                                 <li><a class="nav-link" href="{{ route('personnels.index') }}"><i class="fa fa-list"></i> لیست پرسنل </a></li>
                             </ul>
                         </li>
 
                         {{--LegalInformation--}}
+                        @role(config('roleconst.admin'))
                         <li ><a href="{{ route('salaries.index') }}"><i class="fa fa-dollar"></i> <span>اطلاعات حقوقی</span> <span class="sr-only"></span></a></li>
+                        @endrole
 
                         {{--OrganizationalUnit--}}
                         <li class="dropdown">
@@ -308,7 +312,9 @@
                                 <i class="fa fa-bar-chart"></i> <span>واحدهای سازمان</span>
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <li><a class="nav-link" href="{{ route('organizationalUnits.create') }}"><i class="fa fa-plus"></i> ایجاد واحد </a></li>
+                                @endrole
                                 <li><a class="nav-link" href="{{ route('organizationalUnits.index') }}"><i class="fa fa-list"></i> لیست واحدها </a></li>
                             </ul>
                         </li>
@@ -319,7 +325,9 @@
                                 <i class="fa fa-th"></i> <span>شغل</span>
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <li><a class="nav-link" href="{{ route('jobs.create') }}"><i class="fa fa-plus"></i> ایجاد شغل </a></li>
+                                @endrole
                                 <li><a class="nav-link" href="{{ route('jobs.index') }}"><i class="fa fa-list"></i> لیست شغل ها </a></li>
                             </ul>
                         </li>
@@ -330,7 +338,9 @@
                                 <i class="fa fa-file-o"></i> <span>پروژه</span>
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <li><a class="nav-link" href="{{ route('projects.create') }}"><i class="fa fa-plus"></i> ایجاد پروژه </a></li>
+                                @endrole
                                 <li><a class="nav-link" href="{{ route('projects.index') }}"><i class="fa fa-list"></i> لیست پروژه ها </a></li>
                             </ul>
                         </li>
@@ -341,7 +351,9 @@
                                 <i class="fa fa-bell"></i> <span>رویداد</span>
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                @role([config('roleconst.admin'), config('roleconst.normal')])
                                 <li><a class="nav-link" href="{{ route('events.create') }}"><i class="fa fa-plus"></i> ایجاد رویداد </a></li>
+                                @endrole
                                 <li><a class="nav-link" href="{{ route('events.index') }}"><i class="fa fa-list"></i> لیست رویداد ها </a></li>
                             </ul>
                         </li>

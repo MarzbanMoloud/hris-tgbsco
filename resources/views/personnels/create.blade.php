@@ -81,7 +81,8 @@
                                         @slot('name', 'first_name')
                                         @slot('type', 'text')
                                         @slot('id', 'first_name')
-                                        @slot('label', 'نام*')
+                                        @slot('label', 'نام')
+                                        @slot('requiredSign', "*")
                                         @slot('required', 'required')
                                     @endcomponent
                                 </div>
@@ -91,7 +92,8 @@
                                         @slot('name', 'last_name')
                                         @slot('type', 'text')
                                         @slot('id', 'last_name')
-                                        @slot('label', 'نام خانوادگی*')
+                                        @slot('label', 'نام خانوادگی')
+                                        @slot('requiredSign', "*")
                                         @slot('required', 'required')
                                     @endcomponent
                                 </div>
@@ -101,7 +103,8 @@
                                         @slot('name', 'father_name')
                                         @slot('type', 'text')
                                         @slot('id', 'father_name')
-                                        @slot('label', 'نام پدر*')
+                                        @slot('label', 'نام پدر')
+                                        @slot('requiredSign', "*")
                                         @slot('required', 'required')
                                     @endcomponent
                                 </div>
@@ -292,7 +295,8 @@
                                         @slot('name', 'personnel_code')
                                         @slot('type', 'number')
                                         @slot('id', 'personnel_code')
-                                        @slot('label', 'کد پرسنلی*')
+                                        @slot('label', 'کد پرسنلی')
+                                        @slot('requiredSign', "*")
                                         @slot('required', 'required')
                                     @endcomponent
                                 </div>
