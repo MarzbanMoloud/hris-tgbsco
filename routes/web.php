@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
     });
 
     /*---------------------------------- Salary ----------------------------------*/
-    Route::group(['middleware' => ['role:admin']], function() {
+    Route::group(['middleware' => ['role:admin|financial']], function() {
         Route::get('salaries/filter', 'SalaryController@filter')->name('salaries.filter');
         Route::get('salaries/amounts/{personnel}', 'SalaryController@amounts')->name('salaries.amounts');
         Route::resource('salaries', 'SalaryController');

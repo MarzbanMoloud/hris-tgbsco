@@ -157,6 +157,7 @@
                     @csrf
                     <div class="modal-body">
                         <input type="hidden" name="personnel_id" id="legal-info-input">
+
                         {{--InsuranceAmount--}}
                         <div class="form-group col-md-12">
                             <label for="insurance_amount">مبلغ بیمه ای:</label>
@@ -169,7 +170,7 @@
                                    required
                                    placeholder="1,000,000 ریال">
                         </div>
-
+                        @role(config('roleconst.admin'))
                         {{--BenefitOfAmount--}}
                         <div class="form-group col-md-12">
                             <label for="benefit_of_amount">مبلغ حقوق و مزایا:</label>
@@ -182,6 +183,7 @@
                                    required
                                    placeholder="1,000,000 ریال">
                         </div>
+                        @endrole
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">ثبت</button>
@@ -302,7 +304,7 @@
                         </li>
 
                         {{--LegalInformation--}}
-                        @role(config('roleconst.admin'))
+                        @role([config('roleconst.admin'), config('roleconst.financial')])
                         <li ><a href="{{ route('salaries.index') }}"><i class="fa fa-dollar"></i> <span>اطلاعات حقوقی</span> <span class="sr-only"></span></a></li>
                         @endrole
 

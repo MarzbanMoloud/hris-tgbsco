@@ -51,15 +51,21 @@ class SalaryService
             return Salary::create([
                 'user_id' => auth()->id(),
                 'personnel_id' => $salary->getPersonnelId(),
+                'insurance_amount' => ($salary->getInsuranceAmount() && ! empty($salary->getInsuranceAmount())) ? $salary->getInsuranceAmount() : 0,
+                'benefit_of_amount' => ($salary->getBenefitOfAmount() && ! empty($salary->getBenefitOfAmount())) ? $salary->getBenefitOfAmount() : 0,
+            ]);
+        }
+
+        if (auth()->user()->hasRole('admin')){
+            return $salaryRecord->update([
+                'user_id' => auth()->id(),
                 'insurance_amount' => $salary->getInsuranceAmount(),
                 'benefit_of_amount' => $salary->getBenefitOfAmount(),
             ]);
         }
-
         return $salaryRecord->update([
             'user_id' => auth()->id(),
             'insurance_amount' => $salary->getInsuranceAmount(),
-            'benefit_of_amount' => $salary->getBenefitOfAmount(),
         ]);
     }
 
@@ -91,7 +97,7 @@ class SalaryService
         }
 
         if (isset($request->sort)){
-            $personnels->orderBy('updated_at', $request->sort);
+            $personnels->orderBy('hire_date', $request->sort);
         }
 
         if (isset($request->personnelStatus)){

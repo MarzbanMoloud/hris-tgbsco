@@ -59,7 +59,7 @@ class PersonnelService
         }
 
         if (isset($request->sort)){
-            $personnels->orderBy('updated_at', $request->sort);
+            $personnels->orderBy('hire_date', $request->sort);
         }
 
         if (isset($request->personnelStatus)){
