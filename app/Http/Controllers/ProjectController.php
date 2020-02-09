@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Project;
 use App\Services\Project\ProjectService;
 use App\ValueObject\CreateProject;
+use App\ValueObject\UpdateProject;
 use Illuminate\Support\Facades\Session;
 
 
